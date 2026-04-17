@@ -6,11 +6,13 @@ import BottomNav from './BottomNav';
 export default function Layout() {
   return (
     <MobileFrame>
-      <div className="flex flex-col h-full">
-        <main className="flex-1 overflow-y-auto no-scrollbar pb-24">
+      <div className="relative h-full">
+        <main className="h-full overflow-y-auto no-scrollbar pb-28">
           <Outlet />
         </main>
-        <BottomNav />
+        <div className="absolute bottom-0 left-0 right-0 z-30">
+          <BottomNav />
+        </div>
       </div>
     </MobileFrame>
   );

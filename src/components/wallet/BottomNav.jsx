@@ -12,7 +12,7 @@ const items = [
 
 export default function BottomNav() {
   return (
-    <div className="sticky bottom-0 left-0 right-0 z-30 px-4 pb-4 pt-2">
+    <div className="px-4 pb-4 pt-2">
       <motion.nav
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
