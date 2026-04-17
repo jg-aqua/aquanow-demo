@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
 import { Search } from 'lucide-react';
 import AssetRow from '@/components/wallet/AssetRow';
 import { motion } from 'framer-motion';
+import { STATIC_ASSETS } from '@/lib/staticData';
 
 const TABS = ['All', 'Gainers', 'Losers'];
 
@@ -13,10 +12,7 @@ export default function Market() {
   const [tab, setTab] = useState('All');
   const [query, setQuery] = useState('');
 
-  const { data: assets = [] } = useQuery({
-    queryKey: ['assets'],
-    queryFn: () => base44.entities.Asset.list('-price_usd')
-  });
+  const assets = STATIC_ASSETS;
 
   let filtered = assets.filter(
     (a) =>

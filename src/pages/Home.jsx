@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { Bell, QrCode } from 'lucide-react';
+import { STATIC_ASSETS, STATIC_HOLDINGS, STATIC_TRANSACTIONS } from '@/lib/staticData';
 import { motion } from 'framer-motion';
 
 import BalanceCard from '@/components/wallet/BalanceCard';
@@ -14,18 +15,10 @@ import SectionHeader from '@/components/wallet/SectionHeader';
 export default function Home() {
   const navigate = useNavigate();
 
-  const { data: assets = [] } = useQuery({
-    queryKey: ['assets'],
-    queryFn: () => base44.entities.Asset.list()
-  });
-  const { data: holdings = [] } = useQuery({
-    queryKey: ['holdings'],
-    queryFn: () => base44.entities.Holding.list()
-  });
-  const { data: transactions = [] } = useQuery({
-    queryKey: ['transactions'],
-    queryFn: () => base44.entities.Transaction.list('-created_date', 4)
-  });
+  const assets = STATIC_ASSETS;
+  const holdings = STATIC_HOLDINGS;
+  const transactions = STATIC_TRANSACTIONS.slice(0, 4);
+
   const { data: me } = useQuery({
     queryKey: ['me'],
     queryFn: () => base44.auth.me()

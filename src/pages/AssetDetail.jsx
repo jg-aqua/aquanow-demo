@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
-import { Star, TrendingUp, TrendingDown, RefreshCw } from 'lucide-react';
+import { Star, TrendingUp, TrendingDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import TopBar from '@/components/wallet/TopBar';
@@ -10,33 +8,17 @@ import AssetIcon from '@/components/wallet/AssetIcon';
 import PriceChart from '@/components/wallet/PriceChart';
 import TransactionRow from '@/components/wallet/TransactionRow';
 import { formatUSD, formatAmount, formatPercent } from '@/lib/format';
-import { useLivePrices } from '@/hooks/useLivePrices';
+import { STATIC_ASSETS, STATIC_HOLDINGS, STATIC_TRANSACTIONS } from '@/lib/staticData';
 
 export default function AssetDetail() {
   const { symbol } = useParams();
   const navigate = useNavigate();
 
-  const { data: assets = [] } = useQuery({
-    queryKey: ['assets'],
-    queryFn: () => base44.entities.Asset.list(),
-  });
-  const { data: holdings = [] } = useQuery({
-    queryKey: ['holdings'],
-    queryFn: () => base44.entities.Holding.list(),
-  });
-  const { data: transactions = [] } = useQuery({
-    queryKey: ['transactions', symbol],
-    queryFn: () => base44.entities.Transaction.filter({ symbol }, '-created_date'),
-  });
+  const assets = STATIC_ASSETS;
+  const holdings = STATIC_HOLDINGS;
+  const transactions = STATIC_TRANSACTIONS.filter((t) => t.symbol === symbol);
 
-  const { liveprices, isLoading: pricesLoading } = useLivePrices([symbol]);
-
-  const rawAsset = assets.find((a) => a.symbol === symbol);
-  const liveData = liveprices[symbol];
-  const asset = rawAsset && liveData
-    ? { ...rawAsset, price_usd: liveData.price_usd, change_24h: liveData.change_24h }
-    : rawAsset;
-
+  const asset = assets.find((a) => a.symbol === symbol);
   const holding = holdings.find((h) => h.symbol === symbol);
 
   if (!asset) {
@@ -56,12 +38,9 @@ export default function AssetDetail() {
       <TopBar
         title={asset.name}
         right={
-          <div className="flex items-center gap-2">
-            {pricesLoading && <RefreshCw className="w-3.5 h-3.5 text-muted-foreground animate-spin" />}
-            <button className="w-9 h-9 rounded-full border border-border/70 flex items-center justify-center hover:bg-secondary transition-colors">
-              <Star className="w-4 h-4 text-muted-foreground" />
-            </button>
-          </div>
+          <button className="w-9 h-9 rounded-full border border-border/70 flex items-center justify-center hover:bg-secondary transition-colors">
+            <Star className="w-4 h-4 text-muted-foreground" />
+          </button>
         }
       />
 

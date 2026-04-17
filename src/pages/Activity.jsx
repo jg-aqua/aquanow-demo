@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
 import { format } from 'date-fns';
+import { STATIC_TRANSACTIONS } from '@/lib/staticData';
 import { motion } from 'framer-motion';
 
 import TransactionRow from '@/components/wallet/TransactionRow';
@@ -16,10 +15,7 @@ const FILTERS = [
 export default function Activity() {
   const [filter, setFilter] = useState('all');
 
-  const { data: transactions = [] } = useQuery({
-    queryKey: ['transactions', 'all'],
-    queryFn: () => base44.entities.Transaction.list('-created_date'),
-  });
+  const transactions = STATIC_TRANSACTIONS;
 
   const filtered = filter === 'all' ? transactions : transactions.filter((t) => t.type === filter);
 
