@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import TopBar from '@/components/wallet/TopBar';
 import AssetIcon from '@/components/wallet/AssetIcon';
 import { formatUSD, formatAmount } from '@/lib/format';
+import { useLivePrices } from '@/hooks/useLivePrices';
 
 function AssetPicker({ assets, symbol, setSymbol }) {
   return (
@@ -44,13 +45,20 @@ export default function Swap() {
     queryFn: () => base44.entities.Holding.list(),
   });
 
+  const { liveprices } = useLivePrices();
+  const mergedAssets = assets.map((a) =>
+    liveprices[a.symbol]
+      ? { ...a, price_usd: liveprices[a.symbol].price_usd, change_24h: liveprices[a.symbol].change_24h }
+      : a
+  );
+
   const [fromSymbol, setFromSymbol] = useState('ETH');
   const [toSymbol, setToSymbol] = useState('SOL');
   const [amount, setAmount] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const fromAsset = assets.find((a) => a.symbol === fromSymbol);
-  const toAsset = assets.find((a) => a.symbol === toSymbol);
+  const fromAsset = mergedAssets.find((a) => a.symbol === fromSymbol);
+  const toAsset = mergedAssets.find((a) => a.symbol === toSymbol);
   const fromHolding = holdings.find((h) => h.symbol === fromSymbol);
   const toHolding = holdings.find((h) => h.symbol === toSymbol);
 
@@ -61,10 +69,7 @@ export default function Swap() {
   }, [amount, fromAsset, toAsset]);
 
   const balance = fromHolding?.amount || 0;
-  const valid =
-    fromSymbol !== toSymbol &&
-    parseFloat(amount) > 0 &&
-    parseFloat(amount) <= balance;
+  const valid = fromSymbol !== toSymbol && parseFloat(amount) > 0 && parseFloat(amount) <= balance;
 
   const flip = () => {
     setFromSymbol(toSymbol);
@@ -84,19 +89,12 @@ export default function Swap() {
         status: 'confirmed',
       });
       if (fromHolding) {
-        await base44.entities.Holding.update(fromHolding.id, {
-          amount: Math.max(0, balance - n),
-        });
+        await base44.entities.Holding.update(fromHolding.id, { amount: Math.max(0, balance - n) });
       }
       if (toHolding) {
-        await base44.entities.Holding.update(toHolding.id, {
-          amount: (toHolding.amount || 0) + receive,
-        });
+        await base44.entities.Holding.update(toHolding.id, { amount: (toHolding.amount || 0) + receive });
       } else {
-        await base44.entities.Holding.create({
-          symbol: toSymbol,
-          amount: receive,
-        });
+        await base44.entities.Holding.create({ symbol: toSymbol, amount: receive });
       }
     },
     onSuccess: () => {
@@ -138,10 +136,7 @@ export default function Swap() {
         <div className="rounded-3xl border border-border/70 bg-card p-5">
           <div className="flex items-center justify-between">
             <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">From</p>
-            <button
-              onClick={() => setAmount(String(balance))}
-              className="text-xs text-primary font-medium"
-            >
+            <button onClick={() => setAmount(String(balance))} className="text-xs text-primary font-medium">
               Max · {formatAmount(balance, fromSymbol)}
             </button>
           </div>
@@ -160,7 +155,7 @@ export default function Swap() {
             ≈ {formatUSD((parseFloat(amount) || 0) * (fromAsset?.price_usd || 0))}
           </p>
           <div className="mt-4">
-            <AssetPicker assets={assets} symbol={fromSymbol} setSymbol={setFromSymbol} />
+            <AssetPicker assets={mergedAssets} symbol={fromSymbol} setSymbol={setFromSymbol} />
           </div>
         </div>
 
@@ -187,7 +182,7 @@ export default function Swap() {
             ≈ {formatUSD(receive * (toAsset?.price_usd || 0))}
           </p>
           <div className="mt-4">
-            <AssetPicker assets={assets} symbol={toSymbol} setSymbol={setToSymbol} />
+            <AssetPicker assets={mergedAssets} symbol={toSymbol} setSymbol={setToSymbol} />
           </div>
         </div>
 

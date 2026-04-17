@@ -6,6 +6,7 @@ import { CreditCard, Sparkles } from 'lucide-react';
 import TopBar from '@/components/wallet/TopBar';
 import AssetIcon from '@/components/wallet/AssetIcon';
 import { formatUSD } from '@/lib/format';
+import { useLivePrices } from '@/hooks/useLivePrices';
 
 const PRESETS = [50, 100, 250, 500];
 
@@ -18,7 +19,14 @@ export default function Buy() {
     queryFn: () => base44.entities.Asset.list(),
   });
 
-  const asset = assets.find((a) => a.symbol === symbol);
+  const { liveprices } = useLivePrices();
+  const mergedAssets = assets.map((a) =>
+    liveprices[a.symbol]
+      ? { ...a, price_usd: liveprices[a.symbol].price_usd }
+      : a
+  );
+
+  const asset = mergedAssets.find((a) => a.symbol === symbol);
   const receive = asset ? amount / asset.price_usd : 0;
 
   return (
@@ -64,7 +72,7 @@ export default function Buy() {
             You receive
           </p>
           <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-            {assets.map((a) => (
+            {mergedAssets.map((a) => (
               <button
                 key={a.id}
                 onClick={() => setSymbol(a.symbol)}

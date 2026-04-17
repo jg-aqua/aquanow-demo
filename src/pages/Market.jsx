@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { Search } from 'lucide-react';
-import AssetRow from '@/components/wallet/AssetRow';
+import { Search, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+import AssetRow from '@/components/wallet/AssetRow';
+import { useLivePrices } from '@/hooks/useLivePrices';
 
 const TABS = ['All', 'Gainers', 'Losers'];
 
@@ -15,10 +17,19 @@ export default function Market() {
 
   const { data: assets = [] } = useQuery({
     queryKey: ['assets'],
-    queryFn: () => base44.entities.Asset.list('-price_usd'),
+    queryFn: () => base44.entities.Asset.list(),
   });
 
-  let filtered = assets.filter(
+  const { liveprices, isLoading: pricesLoading } = useLivePrices();
+
+  // Merge live prices
+  const mergedAssets = assets.map((a) =>
+    liveprices[a.symbol]
+      ? { ...a, price_usd: liveprices[a.symbol].price_usd, change_24h: liveprices[a.symbol].change_24h }
+      : a
+  );
+
+  let filtered = mergedAssets.filter(
     (a) =>
       a.name.toLowerCase().includes(query.toLowerCase()) ||
       a.symbol.toLowerCase().includes(query.toLowerCase()),
@@ -28,9 +39,16 @@ export default function Market() {
 
   return (
     <div className="px-5 pt-8">
-      <div>
-        <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Explore</p>
-        <h1 className="font-serif text-4xl tracking-tightest mt-1">Market</h1>
+      <div className="flex items-end justify-between">
+        <div>
+          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Explore</p>
+          <h1 className="font-serif text-4xl tracking-tightest mt-1">Market</h1>
+        </div>
+        {pricesLoading ? (
+          <RefreshCw className="w-4 h-4 text-muted-foreground animate-spin mb-1" />
+        ) : (
+          <span className="text-[10px] text-muted-foreground/60 mb-1.5">Live · 30s</span>
+        )}
       </div>
 
       {/* Search */}
