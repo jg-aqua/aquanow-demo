@@ -55,16 +55,16 @@ export default function Home() {
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -6 }}
-        animate={{ opacity: 1, y: 0 }} className="flex items-center justify-between">
-        
+        animate={{ opacity: 1, y: 0 }}
+        className="flex items-center justify-between">
         
         <div className="flex items-center gap-3">
           
 
           
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden">Welcome back</p>
-            <p className="text-sm font-semibold">{firstName}</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Welcome back</p>
+            <h1 className="font-serif text-4xl tracking-tightest mt-1">Portfolio</h1>
           </div>
         </div>
         <div className="flex items-center gap-2">
