@@ -55,8 +55,8 @@ export default function Home() {
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -6 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between">
+        animate={{ opacity: 1, y: 0 }} className="flex items-center justify-between">
+        
         
         <div className="flex items-center gap-3">
           
