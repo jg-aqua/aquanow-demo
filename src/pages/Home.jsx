@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { Bell, QrCode, RefreshCw } from 'lucide-react';
+import { Bell, QrCode } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import BalanceCard from '@/components/wallet/BalanceCard';
@@ -10,7 +10,6 @@ import QuickActions from '@/components/wallet/QuickActions';
 import AssetRow from '@/components/wallet/AssetRow';
 import TransactionRow from '@/components/wallet/TransactionRow';
 import SectionHeader from '@/components/wallet/SectionHeader';
-import { useLivePrices } from '@/hooks/useLivePrices';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -32,29 +31,18 @@ export default function Home() {
     queryFn: () => base44.auth.me(),
   });
 
-  const { liveprices, isLoading: pricesLoading } = useLivePrices();
+  const assetMap = Object.fromEntries(assets.map((a) => [a.symbol, a]));
 
-  // Merge live prices into assets
-  const mergedAssets = assets.map((a) =>
-    liveprices[a.symbol]
-      ? { ...a, price_usd: liveprices[a.symbol].price_usd, change_24h: liveprices[a.symbol].change_24h }
-      : a
-  );
-  const assetMap = Object.fromEntries(mergedAssets.map((a) => [a.symbol, a]));
-
-  const portfolio = holdings
-    .map((h) => {
-      const asset = assetMap[h.symbol];
-      if (!asset) return null;
-      return {
-        ...h,
-        asset,
-        usdValue: h.amount * asset.price_usd,
-        change24hUsd: h.amount * asset.price_usd * (asset.change_24h / 100),
-      };
-    })
-    .filter(Boolean)
-    .sort((a, b) => b.usdValue - a.usdValue);
+  const portfolio = holdings.map((h) => {
+    const asset = assetMap[h.symbol];
+    if (!asset) return null;
+    return {
+      ...h,
+      asset,
+      usdValue: h.amount * asset.price_usd,
+      change24hUsd: h.amount * asset.price_usd * (asset.change_24h / 100),
+    };
+  }).filter(Boolean).sort((a, b) => b.usdValue - a.usdValue);
 
   const totalValue = portfolio.reduce((s, p) => s + p.usdValue, 0);
   const totalChange = portfolio.reduce((s, p) => s + p.change24hUsd, 0);
@@ -80,9 +68,6 @@ export default function Home() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          {pricesLoading && (
-            <RefreshCw className="w-3.5 h-3.5 text-muted-foreground animate-spin" />
-          )}
           <button
             onClick={() => navigate('/receive')}
             className="w-9 h-9 rounded-full border border-border/70 flex items-center justify-center hover:bg-secondary transition-colors"
@@ -110,7 +95,9 @@ export default function Home() {
       <SectionHeader title="Your Assets" actionLabel="See all" actionTo="/market" />
       <div className="-mx-1">
         {portfolio.length === 0 && (
-          <p className="text-sm text-muted-foreground py-6 text-center">No assets yet.</p>
+          <p className="text-sm text-muted-foreground py-6 text-center">
+            No assets yet.
+          </p>
         )}
         {portfolio.map((p, i) => (
           <AssetRow
@@ -133,11 +120,6 @@ export default function Home() {
           <TransactionRow key={tx.id} tx={tx} />
         ))}
       </div>
-
-      {/* Live price badge */}
-      <p className="text-[10px] text-muted-foreground/50 text-center py-6">
-        Prices via CoinGecko · updates every 30s
-      </p>
     </div>
   );
 }
