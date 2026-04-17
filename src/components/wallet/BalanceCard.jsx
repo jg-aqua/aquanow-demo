@@ -72,7 +72,7 @@ export default function BalanceCard({ totalValue = 0, change24hUsd = 0, change24
 
         <div className="mt-5 flex gap-3 relative z-10">
           <button
-            onClick={() => navigate('/receive')} className="bg-primary/20 text-primary text-sm font-semibold rounded-xl flex-1 flex items-center justify-center gap-1.5 h-10 border border-primary/30 hover:bg-primary/30 transition-colors">
+            onClick={() => navigate('/receive')} className="bg-primary/20 text-primary text-sm font-semibold rounded-3xl flex-1 flex items-center justify-center gap-1.5 h-10 border border-primary/30 hover:bg-primary/30 transition-colors">
 
             
             <ArrowDownLeft className="w-4 h-4" /> Deposit
