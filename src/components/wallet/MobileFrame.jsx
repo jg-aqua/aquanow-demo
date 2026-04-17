@@ -11,7 +11,7 @@ export default function MobileFrame({ children }) {
       const vh = window.innerHeight;
       if (vw < 768) return; // mobile — no scale needed
       const scaleH = (vh - PADDING) / PHONE_H;
-      const scaleW = (vw - 80) / PHONE_W;
+      const scaleW = (vw - 40) / PHONE_W;
       const scale = Math.min(scaleH, scaleW, 1); // never upscale
       document.documentElement.style.setProperty('--iphone-scale', scale.toString());
     };
@@ -22,7 +22,7 @@ export default function MobileFrame({ children }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#111] flex items-center justify-center md:py-0">
+    <div className="h-screen w-screen bg-[#111] flex items-center justify-center overflow-hidden">
       {/* iPhone shell */}
       <div
         className="relative hidden md:flex flex-col"
@@ -30,7 +30,7 @@ export default function MobileFrame({ children }) {
           width: 430,
           height: 932,
           transform: 'scale(var(--iphone-scale, 1))',
-          transformOrigin: 'center center',
+          transformOrigin: 'top center',
         }}
       >
 
