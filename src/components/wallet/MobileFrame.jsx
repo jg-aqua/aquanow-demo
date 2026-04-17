@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function MobileFrame({ children }) {
+  useEffect(() => {
+    const PHONE_H = 932;
+    const PHONE_W = 430;
+    const PADDING = 48; // vertical breathing room
+
+    const update = () => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      if (vw < 768) return; // mobile — no scale needed
+      const scaleH = (vh - PADDING) / PHONE_H;
+      const scaleW = (vw - 80) / PHONE_W;
+      const scale = Math.min(scaleH, scaleW, 1); // never upscale
+      document.documentElement.style.setProperty('--iphone-scale', scale.toString());
+    };
+
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#111] flex items-center justify-center md:py-10">
+    <div className="min-h-screen bg-[#111] flex items-center justify-center md:py-6">
       {/* iPhone shell */}
-      <div className="relative hidden md:flex flex-col" style={{ width: 430, height: 932 }}>
+      <div
+        className="relative hidden md:flex flex-col"
+        style={{
+          width: 430,
+          height: 932,
+          transform: 'scale(var(--iphone-scale, 1))',
+          transformOrigin: 'center center',
+        }}
+      >
 
         {/* Outer chassis */}
         <div
