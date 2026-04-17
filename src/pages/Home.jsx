@@ -16,19 +16,19 @@ export default function Home() {
 
   const { data: assets = [] } = useQuery({
     queryKey: ['assets'],
-    queryFn: () => base44.entities.Asset.list(),
+    queryFn: () => base44.entities.Asset.list()
   });
   const { data: holdings = [] } = useQuery({
     queryKey: ['holdings'],
-    queryFn: () => base44.entities.Holding.list(),
+    queryFn: () => base44.entities.Holding.list()
   });
   const { data: transactions = [] } = useQuery({
     queryKey: ['transactions'],
-    queryFn: () => base44.entities.Transaction.list('-created_date', 4),
+    queryFn: () => base44.entities.Transaction.list('-created_date', 4)
   });
   const { data: me } = useQuery({
     queryKey: ['me'],
-    queryFn: () => base44.auth.me(),
+    queryFn: () => base44.auth.me()
   });
 
   const assetMap = Object.fromEntries(assets.map((a) => [a.symbol, a]));
@@ -40,13 +40,13 @@ export default function Home() {
       ...h,
       asset,
       usdValue: h.amount * asset.price_usd,
-      change24hUsd: h.amount * asset.price_usd * (asset.change_24h / 100),
+      change24hUsd: h.amount * asset.price_usd * (asset.change_24h / 100)
     };
   }).filter(Boolean).sort((a, b) => b.usdValue - a.usdValue);
 
   const totalValue = portfolio.reduce((s, p) => s + p.usdValue, 0);
   const totalChange = portfolio.reduce((s, p) => s + p.change24hUsd, 0);
-  const totalChangePct = totalValue ? (totalChange / (totalValue - totalChange)) * 100 : 0;
+  const totalChangePct = totalValue ? totalChange / (totalValue - totalChange) * 100 : 0;
 
   const firstName = (me?.full_name || 'there').split(' ')[0];
 
@@ -56,10 +56,10 @@ export default function Home() {
       <motion.div
         initial={{ opacity: 0, y: -6 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
-      >
+        className="flex items-center justify-between">
+        
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-semibold">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-semibold hidden">
             {firstName[0]?.toUpperCase()}
           </div>
           <div>
@@ -70,8 +70,8 @@ export default function Home() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate('/receive')}
-            className="w-9 h-9 rounded-full border border-border/70 flex items-center justify-center hover:bg-secondary transition-colors"
-          >
+            className="w-9 h-9 rounded-full border border-border/70 flex items-center justify-center hover:bg-secondary transition-colors">
+            
             <QrCode className="w-4 h-4" />
           </button>
           <button className="w-9 h-9 rounded-full border border-border/70 flex items-center justify-center hover:bg-secondary transition-colors relative">
@@ -86,40 +86,40 @@ export default function Home() {
         <BalanceCard
           totalValue={totalValue}
           change24hUsd={totalChange}
-          change24hPct={totalChangePct}
-        />
+          change24hPct={totalChangePct} />
+        
         <QuickActions />
       </div>
 
       {/* Holdings */}
       <SectionHeader title="Your Assets" actionLabel="See all" actionTo="/market" />
       <div className="-mx-1">
-        {portfolio.length === 0 && (
-          <p className="text-sm text-muted-foreground py-6 text-center">
+        {portfolio.length === 0 &&
+        <p className="text-sm text-muted-foreground py-6 text-center">
             No assets yet.
           </p>
+        }
+        {portfolio.map((p, i) =>
+        <AssetRow
+          key={p.id}
+          asset={p.asset}
+          holdingAmount={p.amount}
+          index={i}
+          onClick={() => navigate(`/asset/${p.asset.symbol}`)} />
+
         )}
-        {portfolio.map((p, i) => (
-          <AssetRow
-            key={p.id}
-            asset={p.asset}
-            holdingAmount={p.amount}
-            index={i}
-            onClick={() => navigate(`/asset/${p.asset.symbol}`)}
-          />
-        ))}
       </div>
 
       {/* Recent Activity */}
       <SectionHeader title="Recent Activity" actionLabel="View all" actionTo="/activity" />
       <div className="divide-y divide-border/60">
-        {transactions.length === 0 && (
-          <p className="text-sm text-muted-foreground py-6 text-center">No activity yet.</p>
+        {transactions.length === 0 &&
+        <p className="text-sm text-muted-foreground py-6 text-center">No activity yet.</p>
+        }
+        {transactions.map((tx) =>
+        <TransactionRow key={tx.id} tx={tx} />
         )}
-        {transactions.map((tx) => (
-          <TransactionRow key={tx.id} tx={tx} />
-        ))}
       </div>
-    </div>
-  );
+    </div>);
+
 }
