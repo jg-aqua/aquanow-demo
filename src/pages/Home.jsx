@@ -63,8 +63,8 @@ export default function Home() {
 
           
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Welcome back</p>
-            <h1 className="font-serif text-4xl tracking-tightest mt-1">Portfolio</h1>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden">Welcome back</p>
+            <p className="text-sm font-semibold">{firstName}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
