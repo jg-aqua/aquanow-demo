@@ -34,27 +34,27 @@
   }
 
   .dark {
-    /* Dark obsidian with warm gold accent */
-    --background: 230 15% 6%;
-    --foreground: 36 15% 96%;
-    --card: 230 14% 9%;
-    --card-foreground: 36 15% 96%;
-    --popover: 230 14% 9%;
-    --popover-foreground: 36 15% 96%;
-    --primary: 39 85% 62%;
-    --primary-foreground: 230 20% 8%;
-    --secondary: 230 12% 13%;
-    --secondary-foreground: 36 15% 96%;
-    --muted: 230 10% 14%;
-    --muted-foreground: 30 8% 62%;
-    --accent: 39 85% 62%;
-    --accent-foreground: 230 20% 8%;
+    /* Light mode — soft white with navy blue accent */
+    --background: 210 30% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 222 70% 30%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 20% 93%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 18% 90%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 222 70% 30%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 98%;
-    --border: 230 10% 16%;
-    --input: 230 10% 16%;
-    --ring: 39 85% 62%;
-    --success: 152 60% 50%;
+    --border: 214 20% 86%;
+    --input: 214 20% 86%;
+    --ring: 222 70% 30%;
+    --success: 152 60% 40%;
     --radius: 1.25rem;
   }
 }
