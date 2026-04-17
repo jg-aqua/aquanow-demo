@@ -45,26 +45,26 @@ export default function Market() {
       </div>
 
       {/* Tabs */}
-      <div className="mt-4 flex items-center gap-1 bg-secondary rounded-full p-1 border border-border/70 hidden">
-        {TABS.map((t) =>
-        <button
-          key={t}
-          onClick={() => setTab(t)} className="text-[10px] text-muted-foreground/60 mb-1.5 hidden">
+      
 
-          
-            {tab === t &&
-          <motion.span
-            layoutId="market-pill"
-            className="absolute inset-0 rounded-full bg-background shadow"
-            transition={{ type: 'spring', stiffness: 400, damping: 30 }} />
 
-          }
-            <span className={`relative z-10 ${tab === t ? 'text-foreground' : 'text-muted-foreground'}`}>
-              {t}
-            </span>
-          </button>
-        )}
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
       {/* List */}
       <div className="mt-4 -mx-1">
