@@ -4,7 +4,7 @@ export default function MobileFrame({ children }) {
   useEffect(() => {
     const PHONE_H = 932;
     const PHONE_W = 430;
-    const PADDING = 48; // vertical breathing room
+    const PADDING = 12; // vertical breathing room
 
     const update = () => {
       const vw = window.innerWidth;
@@ -22,7 +22,7 @@ export default function MobileFrame({ children }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#111] flex items-center justify-center md:py-6">
+    <div className="min-h-screen bg-[#111] flex items-center justify-center md:py-1">
       {/* iPhone shell */}
       <div
         className="relative hidden md:flex flex-col"
