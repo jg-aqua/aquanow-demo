@@ -59,9 +59,9 @@ export default function Home() {
         className="flex items-center justify-between">
         
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-semibold hidden">
-            {firstName[0]?.toUpperCase()}
-          </div>
+          
+
+          
           <div>
             <p className="text-xs text-muted-foreground">Welcome back</p>
             <p className="text-sm font-semibold">{firstName}</p>
