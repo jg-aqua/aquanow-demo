@@ -16,7 +16,7 @@ export default function AssetIcon({ asset, size = 44 }) {
   if (imageUrl && !imgError) {
     return (
       <div
-        className="rounded-full overflow-hidden shrink-0 shadow-lg shadow-black/20 ring-1 ring-white/10 bg-white"
+        className="rounded-full overflow-hidden shrink-0 bg-white"
         style={{ width: size, height: size }}
       >
         <img
@@ -34,7 +34,7 @@ export default function AssetIcon({ asset, size = 44 }) {
   // Fallback: colored circle with letter
   return (
     <div
-      className="rounded-full flex items-center justify-center text-white shadow-lg shadow-black/20 ring-1 ring-white/10 shrink-0"
+      className="rounded-full flex items-center justify-center text-white shrink-0"
       style={style}
     >
       <span
