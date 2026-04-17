@@ -22,7 +22,7 @@ export default function MobileFrame({ children }) {
   }, []);
 
   return (
-    <div className="h-screen overflow-hidden bg-[#111] flex items-center justify-center">
+    <div className="h-screen overflow-hidden bg-[#111] flex items-center justify-center py-2">
       {/* iPhone shell */}
       <div
         className="relative hidden md:flex flex-col"
