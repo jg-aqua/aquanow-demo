@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, TrendingUp, TrendingDown } from 'lucide-react';
+import { Eye, EyeOff, TrendingUp, TrendingDown, ArrowDownLeft, ArrowUpRight } from 'lucide-react';
 import { formatUSD, formatPercent } from '@/lib/format';
 
 export default function BalanceCard({ totalValue = 0, change24hUsd = 0, change24hPct = 0 }) {
   const [hidden, setHidden] = useState(false);
+  const navigate = useNavigate();
   const positive = change24hUsd >= 0;
 
   return (
@@ -66,6 +68,21 @@ export default function BalanceCard({ totalValue = 0, change24hUsd = 0, change24
             {positive ? '+' : ''}
             {formatUSD(change24hUsd)} · 24h
           </span>
+        </div>
+
+        <div className="mt-5 flex gap-3 relative z-10">
+          <button
+            onClick={() => navigate('/receive')}
+            className="flex-1 flex items-center justify-center gap-1.5 h-10 rounded-xl bg-primary/20 border border-primary/30 text-primary text-sm font-semibold hover:bg-primary/30 transition-colors"
+          >
+            <ArrowDownLeft className="w-4 h-4" /> Deposit
+          </button>
+          <button
+            onClick={() => navigate('/send')}
+            className="flex-1 flex items-center justify-center gap-1.5 h-10 rounded-xl bg-white/10 border border-white/15 text-foreground text-sm font-semibold hover:bg-white/20 transition-colors"
+          >
+            <ArrowUpRight className="w-4 h-4" /> Withdraw
+          </button>
         </div>
       </div>
     </motion.div>
