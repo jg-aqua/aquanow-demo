@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 @layer base {
   :root {
     --font-inter: 'Inter', system-ui, sans-serif;
-    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-serif: 'Plus Jakarta Sans', sans-serif;
 
     /* Light mode — soft ivory */
     --background: 36 30% 97%;
@@ -22,7 +22,7 @@
     --secondary-foreground: 24 10% 10%;
     --muted: 36 15% 92%;
     --muted-foreground: 24 6% 42%;
-    --accent: 39 70% 55%;
+    --accent: 100 100% 66%;
     --accent-foreground: 24 10% 10%;
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 98%;
