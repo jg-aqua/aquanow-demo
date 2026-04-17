@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function MobileFrame({ children }) {
   return (
-    <div className="h-screen bg-[#111] flex items-center justify-center md:py-6">
+    <div className="min-h-screen bg-[#111] flex items-center justify-center md:py-10">
       {/* iPhone shell */}
-      <div className="relative hidden md:flex flex-col" style={{ width: 430, height: 'calc(100vh - 48px)', maxHeight: 932 }}>
+      <div className="relative hidden md:flex flex-col" style={{ width: 430, height: 932 }}>
 
         {/* Outer chassis */}
         <div
