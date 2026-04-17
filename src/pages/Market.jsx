@@ -45,7 +45,7 @@ export default function Market() {
       </div>
 
       {/* Tabs */}
-      <div className="mt-4 flex items-center gap-1 bg-secondary rounded-full p-1 border border-border/70">
+      <div className="mt-4 flex items-center gap-1 bg-secondary rounded-full p-1 border border-border/70 hidden">
         {TABS.map((t) =>
         <button
           key={t}
