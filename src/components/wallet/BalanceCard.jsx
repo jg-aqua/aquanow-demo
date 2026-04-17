@@ -13,8 +13,8 @@ export default function BalanceCard({ totalValue = 0, change24hUsd = 0, change24
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
-      className="relative overflow-hidden rounded-3xl p-6 border border-border/70"
+      transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }} className="pt-6 pr-6 pb-4 pl-6 rounded-3xl relative overflow-hidden border border-border/70"
+
       style={{
         background:
         'radial-gradient(120% 100% at 0% 0%, hsl(var(--primary) / 0.15) 0%, transparent 55%), linear-gradient(160deg, hsl(var(--card)) 0%, hsl(var(--secondary)) 100%)'
