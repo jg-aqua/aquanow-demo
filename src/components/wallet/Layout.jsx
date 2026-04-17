@@ -6,7 +6,7 @@ import BottomNav from './BottomNav';
 export default function Layout() {
   return (
     <MobileFrame>
-      <div className="flex flex-col min-h-screen md:min-h-[900px]">
+      <div className="flex flex-col h-full">
         <main className="flex-1 overflow-y-auto no-scrollbar pb-24">
           <Outlet />
         </main>
