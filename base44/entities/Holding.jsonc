@@ -1,0 +1,22 @@
+{
+  "name": "Holding",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "Asset symbol"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Amount of the asset held"
+    },
+    "wallet_address": {
+      "type": "string",
+      "description": "Mock wallet address for this asset"
+    }
+  },
+  "required": [
+    "symbol",
+    "amount"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Transaction",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "send",
+        "receive",
+        "swap"
+      ],
+      "description": "Transaction type"
+    },
+    "symbol": {
+      "type": "string",
+      "description": "Asset symbol"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Amount transacted"
+    },
+    "usd_value": {
+      "type": "number",
+      "description": "USD value at time of transaction"
+    },
+    "counterparty": {
+      "type": "string",
+      "description": "Address or label of other party"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "confirmed",
+        "failed"
+      ],
+      "default": "confirmed"
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "type",
+    "symbol",
+    "amount"
+  ]
+}

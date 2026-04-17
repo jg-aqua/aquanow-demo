@@ -1,0 +1,42 @@
+{
+  "name": "Asset",
+  "type": "object",
+  "properties": {
+    "symbol": {
+      "type": "string",
+      "description": "Ticker symbol, e.g. BTC"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full name, e.g. Bitcoin"
+    },
+    "price_usd": {
+      "type": "number",
+      "description": "Current USD price"
+    },
+    "change_24h": {
+      "type": "number",
+      "description": "24h price change in percent"
+    },
+    "color": {
+      "type": "string",
+      "description": "Hex color for the asset"
+    },
+    "icon_letter": {
+      "type": "string",
+      "description": "Single letter for icon fallback"
+    },
+    "sparkline": {
+      "type": "array",
+      "description": "Recent price points for mini chart",
+      "items": {
+        "type": "number"
+      }
+    }
+  },
+  "required": [
+    "symbol",
+    "name",
+    "price_usd"
+  ]
+}
