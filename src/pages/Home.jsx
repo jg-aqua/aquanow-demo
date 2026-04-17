@@ -64,7 +64,7 @@ export default function Home() {
           
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden">CRYPTO</p>
-            <h1 className="font-serif text-4xl tracking-tightest mt-1">Portfolio</h1>
+            <h1 className="text-4xl font-serif tracking-tightest">Portfolio</h1>
           </div>
         </div>
         <div className="flex items-center gap-2">
