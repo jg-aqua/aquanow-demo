@@ -1,46 +1,29 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { toast } from 'sonner';
 
 import TopBar from '@/components/wallet/TopBar';
 import AssetIcon from '@/components/wallet/AssetIcon';
 import { formatUSD, formatAmount } from '@/lib/format';
-import { useLivePrices } from '@/hooks/useLivePrices';
+import { STATIC_ASSETS, STATIC_HOLDINGS } from '@/lib/staticData';
 
 export default function Send() {
   const navigate = useNavigate();
   const location = useLocation();
-  const queryClient = useQueryClient();
 
   const params = new URLSearchParams(location.search);
   const initialSymbol = params.get('symbol') || 'BTC';
 
-  const { data: assets = [] } = useQuery({
-    queryKey: ['assets'],
-    queryFn: () => base44.entities.Asset.list(),
-  });
-  const { data: holdings = [] } = useQuery({
-    queryKey: ['holdings'],
-    queryFn: () => base44.entities.Holding.list(),
-  });
-
-  const { liveprices } = useLivePrices();
-  const mergedAssets = assets.map((a) =>
-    liveprices[a.symbol]
-      ? { ...a, price_usd: liveprices[a.symbol].price_usd, change_24h: liveprices[a.symbol].change_24h }
-      : a
-  );
+  const assets = STATIC_ASSETS;
+  const holdings = STATIC_HOLDINGS;
 
   const [symbol, setSymbol] = useState(initialSymbol);
   const [address, setAddress] = useState('');
   const [amount, setAmount] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const asset = mergedAssets.find((a) => a.symbol === symbol);
+  const asset = assets.find((a) => a.symbol === symbol);
   const holding = holdings.find((h) => h.symbol === symbol);
   const balance = holding?.amount || 0;
 
@@ -52,29 +35,16 @@ export default function Send() {
 
   const valid = address.length > 6 && parseFloat(amount) > 0 && parseFloat(amount) <= balance;
 
-  const mutation = useMutation({
-    mutationFn: async () => {
-      const n = parseFloat(amount);
-      await base44.entities.Transaction.create({
-        type: 'send',
-        symbol,
-        amount: n,
-        usd_value: n * asset.price_usd,
-        counterparty: address,
-        status: 'confirmed',
-      });
-      if (holding) {
-        await base44.entities.Holding.update(holding.id, { amount: Math.max(0, balance - n) });
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['transactions'] });
-      queryClient.invalidateQueries({ queryKey: ['holdings'] });
+  const [isPending, setIsPending] = useState(false);
+  const handleSend = () => {
+    setIsPending(true);
+    setTimeout(() => {
+      setIsPending(false);
       setSuccess(true);
       toast.success(`${amount} ${symbol} sent`);
       setTimeout(() => navigate('/'), 1400);
-    },
-  });
+    }, 800);
+  };
 
   if (success) {
     return (
@@ -162,11 +132,11 @@ export default function Send() {
         </div>
 
         <button
-          disabled={!valid || mutation.isPending}
-          onClick={() => mutation.mutate()}
+          disabled={!valid || isPending}
+          onClick={handleSend}
           className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
         >
-          {mutation.isPending ? 'Sending…' : (<>Send {symbol} <ArrowUpRight className="w-4 h-4" /></>)}
+          {isPending ? 'Sending…' : (<>Send {symbol} <ArrowUpRight className="w-4 h-4" /></>)}
         </button>
       </div>
     </div>
