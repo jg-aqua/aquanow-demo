@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 
 import TopBar from '@/components/wallet/TopBar';
 import AssetIcon from '@/components/wallet/AssetIcon';
@@ -76,7 +77,7 @@ export default function Send() {
         <div className="rounded-3xl border border-border/70 bg-card p-5">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Asset</p>
           <div className="mt-3 flex gap-2 overflow-x-auto no-scrollbar pb-1">
-            {mergedAssets.map((a) => (
+            {assets.map((a) => (
               <button
                 key={a.id}
                 onClick={() => setSymbol(a.symbol)}
