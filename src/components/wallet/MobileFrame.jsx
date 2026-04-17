@@ -4,7 +4,7 @@ export default function MobileFrame({ children }) {
   useEffect(() => {
     const PHONE_H = 932;
     const PHONE_W = 430;
-    const PADDING = 2; // vertical breathing room
+    const PADDING = 4; // vertical breathing room
 
     const update = () => {
       const vw = window.innerWidth;
