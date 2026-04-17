@@ -63,7 +63,7 @@ export default function Home() {
 
           
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground hidden">CRYPTO</p>
+            
             <h1 className="text-4xl font-serif tracking-tightest">Portfolio</h1>
           </div>
         </div>
