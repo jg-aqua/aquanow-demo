@@ -16,7 +16,7 @@ export default function BottomNav() {
       <motion.nav
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 220, damping: 24 }} className="px-2 py-2 opacity-80 rounded-full glass border border-border/60 flex items-center justify-around shadow-xl shadow-black/30">
+        transition={{ type: 'spring', stiffness: 220, damping: 24 }} className="px-2 py-2 opacity-100 rounded-full glass border border-border/60 flex items-center justify-around shadow-xl shadow-black/30">
 
         
         {items.map(({ to, icon: Icon, label }) =>
