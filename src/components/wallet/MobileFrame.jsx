@@ -2,20 +2,9 @@ import React from 'react';
 
 export default function MobileFrame({ children }) {
   return (
-    <div className="min-h-screen bg-[#111] flex items-center justify-center">
-      {/* iPhone shell — scales to fit viewport height with margin */}
-      <div
-        className="relative hidden md:flex flex-col origin-center"
-        style={{
-          width: 430,
-          height: 932,
-          scale: 'calc((100vh - 48px) / 932)',
-          // Fallback for browsers without scale shorthand:
-          transform: 'scale(calc((100vh - 48px) / 932))',
-          transformOrigin: 'center center',
-          margin: 'calc((100vh - 932px) / 2) 0',
-        }}
-      >
+    <div className="min-h-screen bg-[#111] flex items-center justify-center md:py-10">
+      {/* iPhone shell */}
+      <div className="relative hidden md:flex flex-col" style={{ width: 430, height: 932 }}>
 
         {/* Outer chassis */}
         <div
