@@ -101,18 +101,18 @@ export default function Withdraw() {
             <div className="flex-1 flex flex-col">
               {/* From */}
               <div className="pb-5">
+                <p className="text-sm text-muted-foreground mb-1">From ↓</p>
                 <p className="text-base font-bold text-foreground leading-tight">{ACCOUNTS.current.label}</p>
                 <p className="text-sm text-muted-foreground mt-1">Available: {formatUSD(ACCOUNTS.current.balance)}</p>
-                <p className="text-sm text-muted-foreground mt-2">From ↓</p>
               </div>
 
               <div className="border-t border-border/40 mb-5" />
 
               {/* To */}
               <div>
+                <p className="text-sm text-muted-foreground mb-1">To</p>
                 <p className="text-base font-bold text-foreground leading-tight">{ACCOUNTS.investment.label}</p>
                 <p className="text-sm text-muted-foreground mt-1">Balance: {formatUSD(ACCOUNTS.investment.balance)}</p>
-                <p className="text-sm text-muted-foreground mt-2">To</p>
               </div>
             </div>
           </div>
