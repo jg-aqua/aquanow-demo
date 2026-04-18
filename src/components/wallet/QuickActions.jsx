@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowUpRight, ArrowDownLeft, Repeat2, CreditCard, TrendingDown } from 'lucide-react';
+import { ArrowUpRight, ArrowDownLeft, Repeat2, CreditCard, MinusCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const actions = [
 { label: 'Buy', icon: CreditCard, to: '/buy' },
-{ label: 'Sell', icon: TrendingDown, to: '/sell' },
+{ label: 'Sell', icon: MinusCircle, to: '/sell' },
 { label: 'Send', icon: ArrowUpRight, to: '/send' },
 /*{ label: 'Receive', icon: ArrowDownLeft, to: '/receive' },*/
 { label: 'Swap', icon: Repeat2, to: '/swap' },
