@@ -82,9 +82,9 @@ export default function BuyOrderSummary({ asset, amount, receive, onBack }) {
           Confirm Purchase
         </button>
 
-        <p className="text-[11px] text-muted-foreground text-center mt-3 leading-relaxed hidden">
-          Demo only — no real transactions are processed.
-        </p>
+        
+
+        
       </div>
     </div>);
 
