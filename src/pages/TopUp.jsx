@@ -119,20 +119,20 @@ export default function TopUp() {
         </div>
 
         {/* Summary row */}
-        <div className="rounded-3xl border border-border/70 bg-card divide-y divide-border/60 overflow-hidden hidden">
-          
+        
 
 
-          
-          
 
 
-          
-          
 
 
-          
-        </div>
+
+
+
+
+
+
+        
 
         <button
           disabled={invalid}
