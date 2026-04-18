@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const actions = [
   { label: 'Send', icon: ArrowUpRight, to: '/send' },
-  { label: 'Receive', icon: ArrowDownLeft, to: '/receive' },
+  /*{ label: 'Receive', icon: ArrowDownLeft, to: '/receive' },*/
   { label: 'Swap', icon: Repeat2, to: '/swap' },
   { label: 'Buy', icon: CreditCard, to: '/buy' },
 ];
