@@ -32,7 +32,7 @@ export default function BalanceCard({ totalValue = 0, change24hUsd = 0, change24
           <p className="text-xs uppercase tracking-[0.2em] text-white/50 font-medium">
             Total Balance
           </p>
-          <p className="text-[10px] text-white/30 mt-1">USD · All wallets</p>
+          <p className="text-[10px] text-white/30 mt-1 hidden">USD · All wallets</p>
         </div>
         <button
           onClick={() => setHidden((v) => !v)}
