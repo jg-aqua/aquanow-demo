@@ -119,20 +119,20 @@ export default function Withdraw() {
         </div>
 
         {/* Summary row */}
-        <div className="rounded-3xl border border-border/70 bg-card divide-y divide-border/60 overflow-hidden hidden">
-          <div className="flex items-center justify-between px-5 py-3.5 hidden">
-            <span className="text-sm text-muted-foreground">Transfer Amount</span>
-            <span className="text-sm font-medium tabular-nums">{formatUSD(amount)}</span>
-          </div>
-          <div className="flex items-center justify-between px-5 py-3.5 hidden">
-            <span className="text-sm text-muted-foreground">Fee</span>
-            <span className="text-sm font-medium tabular-nums text-success">Free</span>
-          </div>
-          <div className="flex items-center justify-between px-5 py-3.5 hidden">
-            <span className="text-sm font-semibold">You receive</span>
-            <span className="text-sm font-semibold text-primary tabular-nums">{formatUSD(amount)}</span>
-          </div>
-        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
         <button
           disabled={invalid}
@@ -142,9 +142,9 @@ export default function Withdraw() {
           Transfer Funds
         </button>
 
-        <p className="text-[11px] text-muted-foreground text-center leading-relaxed hidden">
-          Demo only — no real transactions are processed.
-        </p>
+        
+
+        
       </div>
     </div>);
 
