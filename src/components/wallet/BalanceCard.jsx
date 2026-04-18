@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, TrendingUp, TrendingDown, ArrowDownLeft, ArrowUpRight } from 'lucide-react';
 import { formatUSD, formatPercent } from '@/lib/format';
+import PortfolioChart from '@/components/wallet/PortfolioChart';
 
 export default function BalanceCard({ totalValue = 0, change24hUsd = 0, change24hPct = 0 }) {
   const [hidden, setHidden] = useState(false);
@@ -70,19 +71,8 @@ export default function BalanceCard({ totalValue = 0, change24hUsd = 0, change24
           </span>
         </div>
 
-        <div className="mt-5 flex gap-3 relative z-10">
-          
-
-
-
-
-          
-          
-
-
-
-
-          
+        <div className="mt-2 relative z-10">
+          <PortfolioChart />
         </div>
       </div>
     </motion.div>);
