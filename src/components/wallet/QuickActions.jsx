@@ -13,7 +13,7 @@ const actions = [
 export default function QuickActions() {
   const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-4 gap-3 mt-5">
+    <div className="flex justify-center gap-3 mt-5">
       {actions.map(({ label, icon: Icon, to }, i) =>
       <motion.button
         key={label}
