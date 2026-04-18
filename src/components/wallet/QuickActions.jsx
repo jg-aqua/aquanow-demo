@@ -4,10 +4,11 @@ import { ArrowUpRight, ArrowDownLeft, Repeat2, CreditCard } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const actions = [
+{ label: 'Buy', icon: CreditCard, to: '/buy' },
 { label: 'Send', icon: ArrowUpRight, to: '/send' },
 /*{ label: 'Receive', icon: ArrowDownLeft, to: '/receive' },*/
 { label: 'Swap', icon: Repeat2, to: '/swap' },
-{ label: 'Buy', icon: CreditCard, to: '/buy' }];
+];
 
 
 export default function QuickActions() {
