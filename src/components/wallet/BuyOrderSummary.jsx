@@ -18,7 +18,7 @@ export default function BuyOrderSummary({ asset, amount, receive, onBack }) {
   const rows = [
     { label: 'Quantity', value: `${receive.toFixed(6)} ${asset?.symbol}` },
     { label: 'Price', value: formatUSD(asset?.price_usd || 0) },
-    { label: 'Order Type', value: 'Market Buy' },
+    { label: 'Order Type', value: 'Buy' },
     { label: 'Amount', value: formatUSD(amount) },
     { label: 'Estimated Fees', value: formatUSD(FEES) },
     { label: 'VAT (5%)', value: formatUSD(vat) },
@@ -79,7 +79,7 @@ export default function BuyOrderSummary({ asset, amount, receive, onBack }) {
           onClick={handleConfirm}
           className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
         >
-          Confirm Purchase
+          Confirm
         </button>
 
         <p className="text-[11px] text-muted-foreground text-center mt-3 leading-relaxed">
