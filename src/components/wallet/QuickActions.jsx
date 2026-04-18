@@ -7,8 +7,8 @@ const actions = [
 { label: 'Buy', icon: ArrowUp, to: '/buy' },
 { label: 'Sell', icon: ArrowDown, to: '/sell' },
 /*{ label: 'Send', icon: ArrowUpRight, to: '/send' },
-{ label: 'Receive', icon: ArrowDownLeft, to: '/receive' },*/
-{ label: 'Swap', icon: Repeat2, to: '/swap' },
+{ label: 'Receive', icon: ArrowDownLeft, to: '/receive' },
+{ label: 'Swap', icon: Repeat2, to: '/swap' },*/
 ];
 
 
