@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 const actions = [
 { label: 'Buy', icon: ArrowUp, to: '/buy' },
 { label: 'Sell', icon: ArrowDown, to: '/sell' },
-{ label: 'Top Up', icon: PlusCircle, to: '/receive' },
+{ label: 'Top Up', icon: PlusCircle, to: '/topup' },
 { label: 'Withdraw', icon: ArrowUpRight, to: '/withdraw' },
 /*{ label: 'Swap', icon: Repeat2, to: '/swap' },*/
 ];

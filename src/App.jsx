@@ -54,7 +54,7 @@ const AuthenticatedApp = () => {
         <Route path="/buy" element={<Buy />} />
         <Route path="/sell" element={<Sell />} />
         <Route path="/withdraw" element={<Withdraw />} />
-        <Route path="/receive" element={<TopUp />} />
+        <Route path="/topup" element={<TopUp />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
