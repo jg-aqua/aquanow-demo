@@ -5,12 +5,14 @@ import TopBar from '@/components/wallet/TopBar';
 import AssetIcon from '@/components/wallet/AssetIcon';
 import { formatUSD, formatAmount } from '@/lib/format';
 import { STATIC_ASSETS, STATIC_HOLDINGS } from '@/lib/staticData';
+import SellOrderSummary from '@/components/wallet/SellOrderSummary';
 
 const PRESETS = [10, 25, 50, 100];
 
 export default function Sell() {
   const [usdAmount, setUsdAmount] = useState(100);
   const [symbol, setSymbol] = useState('BTC');
+  const [showSummary, setShowSummary] = useState(false);
 
   const assets = STATIC_ASSETS;
   const holdings = STATIC_HOLDINGS;
@@ -22,6 +24,17 @@ export default function Sell() {
 
   const cryptoAmount = asset ? usdAmount / asset.price_usd : 0;
   const exceedsBalance = cryptoAmount > balance;
+
+  if (showSummary) {
+    return (
+      <SellOrderSummary
+        asset={asset}
+        usdAmount={usdAmount}
+        cryptoAmount={cryptoAmount}
+        onBack={() => setShowSummary(false)}
+      />
+    );
+  }
 
   return (
     <div>
@@ -38,8 +51,8 @@ export default function Sell() {
               type="number"
               value={usdAmount}
               onChange={(e) => setUsdAmount(parseFloat(e.target.value) || 0)}
-              className="bg-transparent outline-none font-serif text-6xl tracking-tightest text-center w-44" />
-            
+              className="bg-transparent outline-none font-serif text-6xl tracking-tightest text-center w-44"
+            />
           </div>
           <p className={`text-xs text-center mt-2 ${exceedsBalance ? 'text-destructive' : 'text-muted-foreground'}`}>
             ≈ {cryptoAmount.toFixed(6)} {symbol}
@@ -47,19 +60,19 @@ export default function Sell() {
           </p>
 
           <div className="grid grid-cols-4 gap-2 mt-6">
-            {PRESETS.map((p) =>
-            <button
-              key={p}
-              onClick={() => setUsdAmount(p)}
-              className={`py-2 rounded-full text-sm font-medium border transition-colors ${
-              usdAmount === p ?
-              'border-primary bg-primary/10' :
-              'border-border/60 hover:bg-secondary'}`
-              }>
-              
+            {PRESETS.map((p) => (
+              <button
+                key={p}
+                onClick={() => setUsdAmount(p)}
+                className={`py-2 rounded-full text-sm font-medium border transition-colors ${
+                  usdAmount === p
+                    ? 'border-primary bg-primary/10'
+                    : 'border-border/60 hover:bg-secondary'
+                }`}
+              >
                 {formatUSD(p, { maximumFractionDigits: 0 })}
               </button>
-            )}
+            ))}
           </div>
         </div>
 
@@ -77,22 +90,22 @@ export default function Sell() {
                   key={a.id}
                   onClick={() => setSymbol(a.symbol)}
                   className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-colors shrink-0 ${
-                  symbol === a.symbol ?
-                  'border-primary bg-primary/10' :
-                  'border-border/60 hover:bg-secondary'}`
-                  }>
-                  
+                    symbol === a.symbol
+                      ? 'border-primary bg-primary/10'
+                      : 'border-border/60 hover:bg-secondary'
+                  }`}
+                >
                   <AssetIcon asset={a} size={22} />
                   <span className="text-sm font-medium">{a.symbol}</span>
-                </button>);
-
+                </button>
+              );
             })}
           </div>
-          {asset &&
-          <p className="text-xs text-muted-foreground mt-2 px-1">
+          {asset && (
+            <p className="text-xs text-muted-foreground mt-2 px-1">
               Balance: {formatAmount(balance, symbol)} · {formatUSD(balanceUsd)}
             </p>
-          }
+          )}
         </div>
 
         {/* Payout info */}
@@ -109,15 +122,16 @@ export default function Sell() {
 
         <button
           disabled={exceedsBalance || usdAmount <= 0}
-          className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed">
-          
+          onClick={() => setShowSummary(true)}
+          className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+        >
           Sell {symbol}
         </button>
 
-        
-
-        
+        <p className="text-[11px] text-muted-foreground text-center mt-3 leading-relaxed">
+          Demo only — no real transactions are processed.
+        </p>
       </div>
-    </div>);
-
+    </div>
+  );
 }
