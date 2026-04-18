@@ -5,12 +5,14 @@ import TopBar from '@/components/wallet/TopBar';
 import AssetIcon from '@/components/wallet/AssetIcon';
 import { formatUSD, formatAmount } from '@/lib/format';
 import { STATIC_ASSETS, STATIC_HOLDINGS } from '@/lib/staticData';
+import SellOrderSummary from '@/components/wallet/SellOrderSummary';
 
 const PRESETS = [10, 25, 50, 100];
 
 export default function Sell() {
   const [usdAmount, setUsdAmount] = useState(100);
   const [symbol, setSymbol] = useState('BTC');
+  const [showSummary, setShowSummary] = useState(false);
 
   const assets = STATIC_ASSETS;
   const holdings = STATIC_HOLDINGS;
@@ -22,6 +24,17 @@ export default function Sell() {
 
   const cryptoAmount = asset ? usdAmount / asset.price_usd : 0;
   const exceedsBalance = cryptoAmount > balance;
+
+  if (showSummary) {
+    return (
+      <SellOrderSummary
+        asset={asset}
+        usdAmount={usdAmount}
+        cryptoAmount={cryptoAmount}
+        onBack={() => setShowSummary(false)}
+      />
+    );
+  }
 
   return (
     <div>
@@ -109,6 +122,7 @@ export default function Sell() {
 
         <button
           disabled={exceedsBalance || usdAmount <= 0}
+          onClick={() => setShowSummary(true)}
           className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Sell {symbol}
