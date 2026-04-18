@@ -87,39 +87,34 @@ export default function Withdraw() {
           </div>
         </div>
 
-        {/* Transfer route */}
-        <div className="rounded-3xl border border-border/70 bg-card overflow-hidden">
-          {/* From */}
-          <div className="px-5 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: `${ACCOUNTS.current.color}22` }}>
-                <div className="w-3 h-3 rounded-full" style={{ background: ACCOUNTS.current.color }} />
+        {/* Transfer route — Timeline Rail */}
+        <div className="rounded-3xl border border-border/70 bg-card px-5 py-6">
+          <div className="relative flex gap-5">
+            {/* Rail column */}
+            <div className="flex flex-col items-center shrink-0" style={{ width: 16 }}>
+              <div className="w-4 h-4 rounded-full shrink-0 mt-1" style={{ background: '#3b82f6' }} />
+              <div className="w-px grow" style={{ background: '#3b82f6' }} />
+              <div className="w-4 h-4 rounded-full shrink-0 mb-1" style={{ background: '#f59e0b' }} />
+            </div>
+
+            {/* Content column */}
+            <div className="flex-1 flex flex-col">
+              {/* From */}
+              <div className="pb-5">
+                <p className="text-base font-bold text-foreground leading-tight">{ACCOUNTS.current.label}</p>
+                <p className="text-sm text-muted-foreground mt-1">Available: {formatUSD(ACCOUNTS.current.balance)}</p>
+                <p className="text-sm text-muted-foreground mt-2">From ↓</p>
               </div>
+
+              <div className="border-t border-border/40 mb-5" />
+
+              {/* To */}
               <div>
-                <p className="text-sm font-medium">{ACCOUNTS.current.label}</p>
-                <p className="text-xs text-muted-foreground">Available: {formatUSD(ACCOUNTS.current.balance)}</p>
+                <p className="text-base font-bold text-foreground leading-tight">{ACCOUNTS.investment.label}</p>
+                <p className="text-sm text-muted-foreground mt-1">Balance: {formatUSD(ACCOUNTS.investment.balance)}</p>
+                <p className="text-sm text-muted-foreground mt-2">To</p>
               </div>
             </div>
-            <span className="text-xs text-muted-foreground font-medium">From</span>
-          </div>
-
-          {/* Arrow divider */}
-          <div className="flex items-center justify-center py-1 border-y border-border/50 bg-secondary/40">
-            <ArrowDown className="w-4 h-4 text-muted-foreground" />
-          </div>
-
-          {/* To */}
-          <div className="px-5 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: `${ACCOUNTS.investment.color}22` }}>
-                <div className="w-3 h-3 rounded-full" style={{ background: ACCOUNTS.investment.color }} />
-              </div>
-              <div>
-                <p className="text-sm font-medium">{ACCOUNTS.investment.label}</p>
-                <p className="text-xs text-muted-foreground">Balance: {formatUSD(ACCOUNTS.investment.balance)}</p>
-              </div>
-            </div>
-            <span className="text-xs text-muted-foreground font-medium">To</span>
           </div>
         </div>
 
