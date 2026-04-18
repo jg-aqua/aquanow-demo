@@ -17,6 +17,7 @@ import Receive from '@/pages/Receive';
 import Swap from '@/pages/Swap';
 import Buy from '@/pages/Buy';
 import Sell from '@/pages/Sell';
+import Withdraw from '@/pages/Withdraw';
 import Profile from '@/pages/Profile';
 
 const AuthenticatedApp = () => {
@@ -51,6 +52,7 @@ const AuthenticatedApp = () => {
         <Route path="/swap" element={<Swap />} />
         <Route path="/buy" element={<Buy />} />
         <Route path="/sell" element={<Sell />} />
+        <Route path="/withdraw" element={<Withdraw />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
