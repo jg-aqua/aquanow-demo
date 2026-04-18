@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const actions = [
 { label: 'Send', icon: ArrowUpRight, to: '/send' },
-{ label: 'Receive', icon: ArrowDownLeft, to: '/receive' },
+/*{ label: 'Receive', icon: ArrowDownLeft, to: '/receive' },*/
 { label: 'Swap', icon: Repeat2, to: '/swap' },
 { label: 'Buy', icon: CreditCard, to: '/buy' }];
 
@@ -13,7 +13,7 @@ const actions = [
 export default function QuickActions() {
   const navigate = useNavigate();
   return (
-    <div className="flex justify-center gap-3 mt-5">
+    <div className="flex justify-center gap-10 mt-5">
       {actions.map(({ label, icon: Icon, to }, i) =>
       <motion.button
         key={label}
