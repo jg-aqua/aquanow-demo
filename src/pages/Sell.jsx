@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MinusCircle } from 'lucide-react';
+import { Landmark } from 'lucide-react';
 
 import TopBar from '@/components/wallet/TopBar';
 import AssetIcon from '@/components/wallet/AssetIcon';
@@ -98,7 +98,7 @@ export default function Sell() {
         {/* Payout info */}
         <div className="mt-6 rounded-2xl border border-border/70 bg-card p-4 flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
-            <MinusCircle className="w-5 h-5" />
+            <Landmark className="w-5 h-5" />
           </div>
           <div className="flex-1">
             <p className="text-sm font-medium">Bank Account · 4242</p>
