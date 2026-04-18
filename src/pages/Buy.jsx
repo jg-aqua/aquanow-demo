@@ -104,9 +104,9 @@ export default function Buy() {
            Buy {symbol}
         </button>
 
-        <p className="text-[11px] text-muted-foreground text-center mt-3 leading-relaxed hidden">
-          Demo only — no real payments are processed.
-        </p>
+        
+
+        
       </div>
     </div>);
 
