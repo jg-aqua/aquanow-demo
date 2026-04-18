@@ -16,14 +16,14 @@ export default function Buy() {
 
   const { data: assets = [] } = useQuery({
     queryKey: ['assets'],
-    queryFn: () => base44.entities.Asset.list(),
+    queryFn: () => base44.entities.Asset.list()
   });
 
   const { liveprices } = useLivePrices();
   const mergedAssets = assets.map((a) =>
-    liveprices[a.symbol]
-      ? { ...a, price_usd: liveprices[a.symbol].price_usd }
-      : a
+  liveprices[a.symbol] ?
+  { ...a, price_usd: liveprices[a.symbol].price_usd } :
+  a
   );
 
   const asset = mergedAssets.find((a) => a.symbol === symbol);
@@ -43,27 +43,27 @@ export default function Buy() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(parseFloat(e.target.value) || 0)}
-              className="bg-transparent outline-none font-serif text-6xl tracking-tightest text-center w-44"
-            />
+              className="bg-transparent outline-none font-serif text-6xl tracking-tightest text-center w-44" />
+            
           </div>
           <p className="text-xs text-muted-foreground text-center mt-2">
             ≈ {receive.toFixed(6)} {symbol}
           </p>
 
           <div className="grid grid-cols-4 gap-2 mt-6">
-            {PRESETS.map((p) => (
-              <button
-                key={p}
-                onClick={() => setAmount(p)}
-                className={`py-2 rounded-full text-sm font-medium border transition-colors ${
-                  amount === p
-                    ? 'border-primary bg-primary/10'
-                    : 'border-border/60 hover:bg-secondary'
-                }`}
-              >
+            {PRESETS.map((p) =>
+            <button
+              key={p}
+              onClick={() => setAmount(p)}
+              className={`py-2 rounded-full text-sm font-medium border transition-colors ${
+              amount === p ?
+              'border-primary bg-primary/10' :
+              'border-border/60 hover:bg-secondary'}`
+              }>
+              
                 {formatUSD(p, { maximumFractionDigits: 0 })}
               </button>
-            ))}
+            )}
           </div>
         </div>
 
@@ -72,20 +72,20 @@ export default function Buy() {
             You receive
           </p>
           <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
-            {mergedAssets.map((a) => (
-              <button
-                key={a.id}
-                onClick={() => setSymbol(a.symbol)}
-                className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-colors shrink-0 ${
-                  symbol === a.symbol
-                    ? 'border-primary bg-primary/10'
-                    : 'border-border/60 hover:bg-secondary'
-                }`}
-              >
+            {mergedAssets.map((a) =>
+            <button
+              key={a.id}
+              onClick={() => setSymbol(a.symbol)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-full border transition-colors shrink-0 ${
+              symbol === a.symbol ?
+              'border-primary bg-primary/10' :
+              'border-border/60 hover:bg-secondary'}`
+              }>
+              
                 <AssetIcon asset={a} size={22} />
                 <span className="text-sm font-medium">{a.symbol}</span>
               </button>
-            ))}
+            )}
           </div>
         </div>
 
@@ -101,13 +101,13 @@ export default function Buy() {
         </div>
 
         <button className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
-          <Sparkles className="w-4 h-4" /> Buy {symbol}
+          <Sparkles className="lucide lucide-sparkles w-4 h-4 hidden" /> Buy {symbol}
         </button>
 
         <p className="text-[11px] text-muted-foreground text-center mt-3 leading-relaxed">
           Demo only — no real payments are processed.
         </p>
       </div>
-    </div>
-  );
+    </div>);
+
 }
