@@ -9,7 +9,7 @@ const PRESETS = [100, 250, 500, 1000];
 
 const ACCOUNTS = {
   current: { label: 'Current Account', balance: 5000.00, color: '#6378ff' },
-  investment: { label: 'Investment Account', balance: 12450.75, color: '#22c55e' },
+  investment: { label: 'Investment Account', balance: 12450.75, color: '#22c55e' }
 };
 
 export default function Withdraw() {
@@ -34,8 +34,8 @@ export default function Withdraw() {
             initial={{ scale: 0.6, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: 'spring', stiffness: 240, damping: 18 }}
-            className="w-20 h-20 rounded-full bg-success/15 flex items-center justify-center"
-          >
+            className="w-20 h-20 rounded-full bg-success/15 flex items-center justify-center">
+            
             <Check className="w-10 h-10 text-success" strokeWidth={2.5} />
           </motion.div>
           <h2 className="font-serif text-3xl mt-6 tracking-tight">Transfer sent!</h2>
@@ -43,8 +43,8 @@ export default function Withdraw() {
             {formatUSD(amount)} moved to your Investment Account.
           </p>
         </div>
-      </div>
-    );
+      </div>);
+
   }
 
   return (
@@ -63,27 +63,27 @@ export default function Withdraw() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(parseFloat(e.target.value) || 0)}
-              className="bg-transparent outline-none font-serif text-6xl tracking-tightest text-center w-44"
-            />
+              className="bg-transparent outline-none font-serif text-6xl tracking-tightest text-center w-44" />
+            
           </div>
-          {exceedsBalance && (
-            <p className="text-xs text-destructive text-center mt-1">Exceeds available balance</p>
-          )}
+          {exceedsBalance &&
+          <p className="text-xs text-destructive text-center mt-1">Exceeds available balance</p>
+          }
 
           <div className="grid grid-cols-4 gap-2 mt-6">
-            {PRESETS.map((p) => (
-              <button
-                key={p}
-                onClick={() => setAmount(p)}
-                className={`py-2 rounded-full text-sm font-medium border transition-colors ${
-                  amount === p
-                    ? 'border-primary bg-primary/10'
-                    : 'border-border/60 hover:bg-secondary'
-                }`}
-              >
+            {PRESETS.map((p) =>
+            <button
+              key={p}
+              onClick={() => setAmount(p)}
+              className={`py-2 rounded-full text-sm font-medium border transition-colors ${
+              amount === p ?
+              'border-primary bg-primary/10' :
+              'border-border/60 hover:bg-secondary'}`
+              }>
+              
                 {formatUSD(p, { maximumFractionDigits: 0 })}
               </button>
-            ))}
+            )}
           </div>
         </div>
 
@@ -119,16 +119,16 @@ export default function Withdraw() {
         </div>
 
         {/* Summary row */}
-        <div className="rounded-3xl border border-border/70 bg-card divide-y divide-border/60 overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-3.5">
+        <div className="rounded-3xl border border-border/70 bg-card divide-y divide-border/60 overflow-hidden hidden">
+          <div className="flex items-center justify-between px-5 py-3.5 hidden">
             <span className="text-sm text-muted-foreground">Transfer Amount</span>
             <span className="text-sm font-medium tabular-nums">{formatUSD(amount)}</span>
           </div>
-          <div className="flex items-center justify-between px-5 py-3.5">
+          <div className="flex items-center justify-between px-5 py-3.5 hidden">
             <span className="text-sm text-muted-foreground">Fee</span>
             <span className="text-sm font-medium tabular-nums text-success">Free</span>
           </div>
-          <div className="flex items-center justify-between px-5 py-3.5">
+          <div className="flex items-center justify-between px-5 py-3.5 hidden">
             <span className="text-sm font-semibold">You receive</span>
             <span className="text-sm font-semibold text-primary tabular-nums">{formatUSD(amount)}</span>
           </div>
@@ -137,15 +137,15 @@ export default function Withdraw() {
         <button
           disabled={invalid}
           onClick={handleConfirm}
-          className="w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
-        >
+          className="w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed">
+          
           Transfer Funds
         </button>
 
-        <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
+        <p className="text-[11px] text-muted-foreground text-center leading-relaxed hidden">
           Demo only — no real transactions are processed.
         </p>
       </div>
-    </div>
-  );
+    </div>);
+
 }
