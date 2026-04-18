@@ -94,7 +94,7 @@ export default function Withdraw() {
             <div className="flex flex-col items-center shrink-0" style={{ width: 16 }}>
               <div className="w-4 h-4 rounded-full shrink-0 mt-1" style={{ background: '#3b82f6' }} />
               <div className="w-px grow" style={{ background: '#3b82f6' }} />
-              <div className="w-4 h-4 rounded-full shrink-0 mb-1" style={{ background: '#f59e0b' }} />
+              <div className="w-4 h-4 rounded-full shrink-0 mb-1" style={{ background: '#3b82f6' }} />
             </div>
 
             {/* Content column */}
