@@ -93,7 +93,7 @@ export default function Withdraw() {
             {/* Rail column */}
             <div className="flex flex-col items-center shrink-0" style={{ width: 16 }}>
               <div className="w-4 h-4 rounded-full shrink-0 mt-1" style={{ background: '#173782' }} />
-              <div className="w-px grow" style={{ background: '#3b82f6' }} />
+              <div className="w-px grow" style={{ background: 'linear-gradient(to bottom, #173782, #3b82f6)' }} />
               <div className="w-4 h-4 rounded-full shrink-0 mb-1" style={{ background: '#3b82f6' }} />
             </div>
 
