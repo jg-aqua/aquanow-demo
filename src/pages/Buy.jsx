@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
-import { CreditCard, Sparkles } from 'lucide-react';
+import { CreditCard } from 'lucide-react';
 
 import TopBar from '@/components/wallet/TopBar';
 import AssetIcon from '@/components/wallet/AssetIcon';
 import { formatUSD } from '@/lib/format';
 import { useLivePrices } from '@/hooks/useLivePrices';
+import BuyOrderSummary from '@/components/wallet/BuyOrderSummary';
 
 const PRESETS = [50, 100, 250, 500];
 
 export default function Buy() {
   const [amount, setAmount] = useState(100);
   const [symbol, setSymbol] = useState('BTC');
+  const [showSummary, setShowSummary] = useState(false);
 
   const { data: assets = [] } = useQuery({
     queryKey: ['assets'],
@@ -28,6 +30,17 @@ export default function Buy() {
 
   const asset = mergedAssets.find((a) => a.symbol === symbol);
   const receive = asset ? amount / asset.price_usd : 0;
+
+  if (showSummary) {
+    return (
+      <BuyOrderSummary
+        asset={asset}
+        amount={amount}
+        receive={receive}
+        onBack={() => setShowSummary(false)}
+      />
+    );
+  }
 
   return (
     <div>
@@ -100,8 +113,10 @@ export default function Buy() {
           <button className="text-xs text-primary font-medium">Change</button>
         </div>
 
-        <button className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
-           Buy {symbol}
+        <button
+          onClick={() => setShowSummary(true)}
+          className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+          Buy {symbol}
         </button>
 
         
