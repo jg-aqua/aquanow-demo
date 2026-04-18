@@ -101,7 +101,7 @@ export default function Buy() {
         </div>
 
         <button className="mt-6 w-full h-14 rounded-2xl bg-primary text-primary-foreground font-semibold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
-          <Sparkles className="lucide lucide-sparkles w-4 h-4 hidden" /> Buy {symbol}
+           Buy {symbol}
         </button>
 
         <p className="text-[11px] text-muted-foreground text-center mt-3 leading-relaxed">
