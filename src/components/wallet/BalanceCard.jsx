@@ -72,13 +72,13 @@ export default function BalanceCard({ totalValue = 0, change24hUsd = 0, change24
 
         <div className="mt-5 flex gap-3 relative z-10">
           <button
-            onClick={() => navigate('/receive')} className="bg-white/15 text-white py-6 text-sm font-semibold rounded-3xl flex-1 flex items-center justify-center gap-1.5 h-10 border border-white/20 hover:bg-white/25 transition-colors">
+            onClick={() => navigate('/receive')} className="bg-white/15 text-white py-6 text-sm font-semibold rounded-3xl flex-1 flex items-center justify-center gap-1.5 h-10 border border-white/20 hover:bg-white/25 transition-colors hidden">
 
             
             <ArrowDownLeft className="w-4 h-4" /> Deposit
           </button>
           <button
-            onClick={() => navigate('/withdraw')} className="bg-white/15 text-white py-6 text-sm font-semibold rounded-3xl flex-1 flex items-center justify-center gap-1.5 h-10 border border-white/20 hover:bg-white/25 transition-colors">
+            onClick={() => navigate('/send')} className="bg-white/15 text-white py-6 text-sm font-semibold rounded-3xl flex-1 flex items-center justify-center gap-1.5 h-10 border border-white/20 hover:bg-white/25 transition-colors hidden">
             
             
             <ArrowUpRight className="w-4 h-4" /> Withdraw
