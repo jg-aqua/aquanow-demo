@@ -16,6 +16,7 @@ import Send from '@/pages/Send';
 import Receive from '@/pages/Receive';
 import Swap from '@/pages/Swap';
 import Buy from '@/pages/Buy';
+import Sell from '@/pages/Sell';
 import Profile from '@/pages/Profile';
 
 const AuthenticatedApp = () => {
@@ -49,6 +50,7 @@ const AuthenticatedApp = () => {
         <Route path="/receive" element={<Receive />} />
         <Route path="/swap" element={<Swap />} />
         <Route path="/buy" element={<Buy />} />
+        <Route path="/sell" element={<Sell />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
