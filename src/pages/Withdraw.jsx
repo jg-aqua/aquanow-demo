@@ -101,7 +101,7 @@ export default function Withdraw() {
             <div className="flex-1 flex flex-col">
               {/* From */}
               <div className="pb-5">
-                <p className="text-sm text-muted-foreground mb-1">From ↓</p>
+                <p className="text-sm text-muted-foreground mb-1">From</p>
                 <p className="text-base font-bold text-foreground leading-tight">{ACCOUNTS.current.label}</p>
                 <p className="text-sm text-muted-foreground mt-1">Available: {formatUSD(ACCOUNTS.current.balance)}</p>
               </div>
