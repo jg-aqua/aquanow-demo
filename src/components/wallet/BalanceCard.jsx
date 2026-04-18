@@ -29,7 +29,7 @@ export default function BalanceCard({ totalValue = 0, change24hUsd = 0, change24
 
       <div className="flex items-center justify-between relative z-10">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-white/50 font-medium">ESt TOTAL v
+          <p className="text-xs uppercase tracking-[0.2em] text-white/50 font-medium">TOTAL value
 
           </p>
           
