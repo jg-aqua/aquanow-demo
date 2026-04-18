@@ -109,16 +109,16 @@ export default function Sell() {
         </div>
 
         {/* Payout info */}
-        <div className="mt-6 rounded-2xl border border-border/70 bg-card p-4 flex items-center gap-3 hidden">
-          <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
-            <Landmark className="w-5 h-5" />
-          </div>
-          <div className="flex-1">
-            <p className="text-sm font-medium">Bank Account · 4242</p>
-            <p className="text-xs text-muted-foreground">Default payout method</p>
-          </div>
-          <button className="text-xs text-primary font-medium">Change</button>
-        </div>
+        
+
+
+
+
+
+
+
+
+        
 
         <button
           disabled={exceedsBalance || usdAmount <= 0}
@@ -128,9 +128,9 @@ export default function Sell() {
           Sell {symbol}
         </button>
 
-        <p className="text-[11px] text-muted-foreground text-center mt-3 leading-relaxed hidden">
-          Demo only — no real transactions are processed.
-        </p>
+        
+
+        
       </div>
     </div>);
 
